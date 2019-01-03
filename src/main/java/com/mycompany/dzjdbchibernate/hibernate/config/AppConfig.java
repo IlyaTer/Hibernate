@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -15,7 +16,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
-@ComponentScan(basePackages="com.mycompany.dzjdbchibernate.hibernate.dao.classes.repositoryes")
+@ComponentScans(value = { 
+      @ComponentScan("com.mycompany.dzjdbchibernate.hibernate.dao.classes.repositoryes"),
+      @ComponentScan("com.mycompany.dzjdbchibernate.hibernate.dao.classes.services") 
+    })
 @EnableTransactionManagement
 public class AppConfig {
     

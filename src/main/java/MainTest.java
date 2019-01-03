@@ -2,9 +2,13 @@
 import com.mycompany.dzjdbchibernate.hibernate.config.AppConfig;
 import com.mycompany.dzjdbchibernate.hibernate.dao.interfaces.IBookDao;
 import com.mycompany.dzjdbchibernate.hibernate.dao.classes.repositoryes.CustomerDaoImpl;
+import com.mycompany.dzjdbchibernate.hibernate.dao.classes.services.StoreService;
+import com.mycompany.dzjdbchibernate.hibernate.dao.interfaces.BookDaoService;
+import com.mycompany.dzjdbchibernate.hibernate.dao.interfaces.CustomerDaoService;
 import com.mycompany.dzjdbchibernate.hibernate.dao.interfaces.ICustomerDao;
 import com.mycompany.dzjdbchibernate.hibernate.dao.interfaces.IPurchaseDao;
 import com.mycompany.dzjdbchibernate.hibernate.dao.interfaces.IStoreDao;
+import com.mycompany.dzjdbchibernate.hibernate.dao.interfaces.PurchaseDaoService;
 import com.mycompany.dzjdbchibernate.hibernate.model.Book;
 import com.mycompany.dzjdbchibernate.hibernate.model.Customer;
 import com.mycompany.dzjdbchibernate.hibernate.model.Purchase;
@@ -20,10 +24,12 @@ public class MainTest {
         System.out.println("=================================================");
         System.out.println();
 
-        IBookDao books = context.getBean("bookDao", IBookDao.class);
-        ICustomerDao cust = context.getBean("customerDao", ICustomerDao.class);
-        IStoreDao st = context.getBean("storeDao", IStoreDao.class);
-        IPurchaseDao purch = context.getBean("purchDao", IPurchaseDao.class);
+        BookDaoService books = context.getBean("bookSrvice", BookDaoService.class);
+        CustomerDaoService cust = context.getBean("customerService",
+                CustomerDaoService.class);
+        StoreService st = context.getBean("storeSrvice", StoreService.class);
+        PurchaseDaoService purch = context.getBean("purchaseSrvice", 
+                PurchaseDaoService.class);
 
         System.out.println(books.findById(1));
         System.out.println(cust.findById(1));
@@ -34,7 +40,7 @@ public class MainTest {
         store.setName("New Store");
         store.setDistrict("District 2");
         
-        st.addUpdate(store);
+        st.add(store);
                 
         System.out.println("Stores:");
         for (Store s : st.findAllWithDetail()) {
